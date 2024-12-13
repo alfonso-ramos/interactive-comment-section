@@ -18,14 +18,19 @@ export default function CurrentUserComments({image, username} : CurrentUserComme
                 content={comment.content}
                 createdAt={comment.createdAt}
                 user={comment.user}
+                replies={comment.replies}
             />
         ))}
 
-        <div>
+        <form action="">
+            <textarea className="border border-indigo-500 rounded-xl w-full" name="" id=""></textarea>
+        </form>
+
+        <div className="p-4">
             <div className="flex justify-between items-center">
                 <img className="rounded-full size-8" src={image} alt={`${username} profile image`} />
 
-                <button>
+                <button className="uppercase py-3 px-7 bg-indigo-600 text-white font-bold rounded-lg">
                     Send
                 </button>
             </div>

@@ -1,8 +1,7 @@
-import Reply from "./Reply"
-
-type CommentProps = {
+type ReplyProps = {
     content: string,
     createdAt: string,
+    replyingTo: string,
     user: {
         image: {
             png: string,
@@ -10,21 +9,9 @@ type CommentProps = {
         },
         username: string
     },
-    replies: [{
-        content:string,
-        createdAt: string,
-        user: {
-            image: {
-                png: string,
-                webp: string,
-            },
-            username: string
-        },
-        replyingTo: string
-    }]
 }
 
-export default function Comment({content, createdAt, user, replies} : CommentProps) {
+export default function Reply({content, createdAt, user, replyingTo} : ReplyProps) {
     return (
         <>
             <div className="p-4 rounded-lg">
@@ -34,23 +21,13 @@ export default function Comment({content, createdAt, user, replies} : CommentPro
                     <p>{createdAt}</p>
                 </div>
                 <p className="my-4">
-                    {content}
+                    <span className="text-bold text-indigo-600">@{replyingTo}</span> {content}
                 </p>
                 <div>
                     <div></div>
                     <div></div>
                 </div>
             </div>
-            {replies.map(
-                reply => (
-                    <Reply                 
-                    content={reply.content}
-                    createdAt={reply.createdAt}
-                    user={reply.user}
-                    replyingTo={reply.replyingTo} 
-                    />
-                )
-            )}
         </>
     )
 }
