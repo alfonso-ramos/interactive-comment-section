@@ -1,40 +1,43 @@
-import Reply from "./Reply"
+import {Comment} from '../types/index'
+import Reply from './Reply'
 
 type CommentProps = {
-    content: string,
-    createdAt: string,
-    user: {
-        image: {
-            png: string,
-            webp: string,
-        },
-        username: string
-    },
-    replies: [{
-        content:string,
-        createdAt: string,
-        user: {
-            image: {
-                png: string,
-                webp: string,
-            },
-            username: string
-        },
-        replyingTo: string
-    }]
+    comment: Comment
+    replies: Comment['replies']
+    // content: string,
+    // createdAt: string,
+    // user: {
+    //     image: {
+    //         png: string,
+    //         webp: string,
+    //     },
+    //     username: string
+    // },
+    // replies: [{
+    //     content:string,
+    //     createdAt: string,
+    //     user: {
+    //         image: {
+    //             png: string,
+    //             webp: string,
+    //         },
+    //         username: string
+    //     },
+    //     replyingTo: string
+    // }]
 }
 
-export default function Comment({content, createdAt, user, replies} : CommentProps) {
+export default function CommentUser({comment, replies} : CommentProps) {
     return (
         <>
             <div className="p-4 rounded-lg">
                 <div className='flex gap-4 items-center'>
-                    <img className='size-8 rounded-full' src={user.image.png || user.image.webp} alt={`${user.username} profile image`} />
-                    <p className="font-bold">{user.username}</p>
-                    <p>{createdAt}</p>
+                    <img className='size-8 rounded-full' src={comment.user.image.png || comment.user.image.webp} alt={`${comment.user.username} profile image`} />
+                    <p className="font-bold">{comment.user.username}</p>
+                    <p>{comment.createdAt}</p>
                 </div>
                 <p className="my-4">
-                    {content}
+                    {comment.content}
                 </p>
                 <div>
                     <div></div>
@@ -44,10 +47,7 @@ export default function Comment({content, createdAt, user, replies} : CommentPro
             {replies.map(
                 reply => (
                     <Reply                 
-                    content={reply.content}
-                    createdAt={reply.createdAt}
-                    user={reply.user}
-                    replyingTo={reply.replyingTo} 
+                        reply={reply}
                     />
                 )
             )}

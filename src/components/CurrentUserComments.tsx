@@ -1,40 +1,38 @@
-import Comment from "./Comment"
-import data from '../../data.json'
+import CommentUser from './Comment'
+import { CommentsData } from "../types"
 
 type CurrentUserCommentsProps = {
-    image: string,
-    username: string
+    currentUser: CommentsData['currentUser'],
+    comments: CommentsData['comments']
 }
 
-export default function CurrentUserComments({image, username} : CurrentUserCommentsProps) {
+export default function CurrentUserComments({currentUser, comments} : CurrentUserCommentsProps) {
 
-    const { comments } = data
-    console.log(comments)
-  return (
-    <div>
-        
-        {comments.map(comment => (
-            <Comment 
-                content={comment.content}
-                createdAt={comment.createdAt}
-                user={comment.user}
-                replies={comment.replies}
-            />
-        ))}
 
-        <form action="">
-            <textarea className="border border-indigo-500 rounded-xl w-full" name="" id=""></textarea>
-        </form>
+    return (
+        <div>
+            
+            {comments.map(comment => (
+                
+                <CommentUser 
+                    comment={comment}
+                    replies={comment.replies}
+                />
+            ))}
 
-        <div className="p-4">
-            <div className="flex justify-between items-center">
-                <img className="rounded-full size-8" src={image} alt={`${username} profile image`} />
+            <form action="">
+                <textarea className="border border-indigo-500 rounded-xl w-full" name="" id=""></textarea>
+            </form>
 
-                <button className="uppercase py-3 px-7 bg-indigo-600 text-white font-bold rounded-lg">
-                    Send
-                </button>
+            <div className="p-4">
+                <div className="flex justify-between items-center">
+                    <img className="rounded-full size-8" src={currentUser.image.png || currentUser.image.webp} alt={`${currentUser.username} profile image`} />
+
+                    <button className="uppercase py-3 px-7 bg-indigo-600 text-white font-bold rounded-lg">
+                        Send
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }

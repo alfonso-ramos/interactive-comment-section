@@ -1,27 +1,20 @@
+import { Reply } from "../types"
+
 type ReplyProps = {
-    content: string,
-    createdAt: string,
-    replyingTo: string,
-    user: {
-        image: {
-            png: string,
-            webp: string,
-        },
-        username: string
-    },
+    reply: Reply
 }
 
-export default function Reply({content, createdAt, user, replyingTo} : ReplyProps) {
+export default function ReplyComponent({reply} : ReplyProps) {
     return (
         <>
             <div className="p-4 rounded-lg">
                 <div className='flex gap-4 items-center'>
-                    <img className='size-8 rounded-full' src={user.image.png || user.image.webp} alt={`${user.username} profile image`} />
-                    <p className="font-bold">{user.username}</p>
-                    <p>{createdAt}</p>
+                    <img className='size-8 rounded-full' src={reply.user.image.png || reply.user.image.webp} alt={`${reply.user.username} profile image`} />
+                    <p className="font-bold">{reply.user.username}</p>
+                    <p>{reply.createdAt}</p>
                 </div>
                 <p className="my-4">
-                    <span className="text-bold text-indigo-600">@{replyingTo}</span> {content}
+                    <span className="text-bold text-indigo-600">@{reply.replyingTo}</span> {reply.content}
                 </p>
                 <div>
                     <div></div>

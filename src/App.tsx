@@ -3,12 +3,14 @@ import data from '../data.json'
 
 function App() {
 
+  const {currentUser, comments} = data
+
   return (
     <>
       <CurrentUserComments 
-        image={data.currentUser.image.webp || data.currentUser.image.png}
-        username={data.currentUser.username}
-        />
+        currentUser={currentUser}
+        comments={comments}
+      />
     </>
   )
 }
